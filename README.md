@@ -22,7 +22,7 @@ Below is a conceptual illustration of how requests pass through the chain:
 flowchart LR
     A["HTTP Controller"] --> B["Service Layer"]
     B --> C["ChainBuilder Execution"]
-    
+
     subgraph Pipeline["Step Execution Pipeline"]
         C --> D["Step 1: Input Validation"]
         D --> E["Step 2: Core Data Retrieval"]
@@ -30,7 +30,7 @@ flowchart LR
         F --> G["Step 4: Dynamic Overrides"]
         G --> H["Step 5: Response Formatter"]
     end
-    
+
     H --> I["Return Formatted Payload"]
 ```
 
@@ -61,13 +61,13 @@ src/
 ### 1. Defining a Step Handler
 
 ```typescript
-import { asStep } from 'src/shared/utils/chain-step-logger';
-import type { FeatureContext } from '../context';
+import { asStep } from "src/shared/utils/chain-step-logger";
+import type { FeatureContext } from "../context";
 
 export function createValidationStep<T extends FeatureContext>() {
   return asStep<T>(async (context: T) => {
     if (!context.requestParams) {
-      throw context.errorFactory.createError('MISSING_PARAMETERS');
+      throw context.errorFactory.createError("MISSING_PARAMETERS");
     }
     // Perform step logic & enrich context
     context.isValidated = true;
@@ -79,9 +79,13 @@ export function createValidationStep<T extends FeatureContext>() {
 ### 2. Composing the Chain
 
 ```typescript
-import { ChainBuilder } from 'src/shared/patterns/chain-builder';
-import type { FeatureContext } from './context';
-import { createValidationStep, createFetchDataStep, createFormatResponseStep } from './steps';
+import { ChainBuilder } from "src/shared/patterns/chain-builder";
+import type { FeatureContext } from "./context";
+import {
+  createValidationStep,
+  createFetchDataStep,
+  createFormatResponseStep,
+} from "./steps";
 
 export const featureChain = new ChainBuilder<FeatureContext>()
   .add(createValidationStep())
@@ -95,6 +99,7 @@ export const featureChain = new ChainBuilder<FeatureContext>()
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js (v18+)
 - pnpm / npm / yarn
 
@@ -127,4 +132,4 @@ pnpm test:cov
 
 ## 📜 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under no license.
