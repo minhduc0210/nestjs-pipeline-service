@@ -61,13 +61,13 @@ src/
 ### 1. Defining a Step Handler
 
 ```typescript
-import { asStep } from "src/shared/utils/chain-step-logger";
-import type { FeatureContext } from "../context";
+import { asStep } from 'src/shared/utils/chain-step-logger';
+import type { FeatureContext } from '../context';
 
 export function createValidationStep<T extends FeatureContext>() {
   return asStep<T>(async (context: T) => {
     if (!context.requestParams) {
-      throw context.errorFactory.createError("MISSING_PARAMETERS");
+      throw context.errorFactory.createError('MISSING_PARAMETERS');
     }
     // Perform step logic & enrich context
     context.isValidated = true;
@@ -79,13 +79,13 @@ export function createValidationStep<T extends FeatureContext>() {
 ### 2. Composing the Chain
 
 ```typescript
-import { ChainBuilder } from "src/shared/patterns/chain-builder";
-import type { FeatureContext } from "./context";
+import { ChainBuilder } from 'src/shared/patterns/chain-builder';
+import type { FeatureContext } from './context';
 import {
   createValidationStep,
   createFetchDataStep,
   createFormatResponseStep,
-} from "./steps";
+} from './steps';
 
 export const featureChain = new ChainBuilder<FeatureContext>()
   .add(createValidationStep())
