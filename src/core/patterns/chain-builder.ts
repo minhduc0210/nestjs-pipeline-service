@@ -6,7 +6,7 @@ export class ChainBuilder<TContext> {
 
   public add(handler: Handler<TContext>): this {
     if (this.firstHandler && this.lastHandler) {
-      this.lastHandler = handler;
+      this.lastHandler = this.lastHandler.setNext(handler);
     } else {
       this.firstHandler = handler;
       this.lastHandler = handler;
