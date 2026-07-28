@@ -1,3 +1,4 @@
+import type { ErrorFactoryService } from 'src/core/errors/nest/error-factory.service';
 import type { AppLoggerService } from 'src/core/logging/nest/app-logger.service';
 
 import type {
@@ -7,6 +8,7 @@ import type {
 
 export interface IDemoContext {
   appLogger: AppLoggerService;
+  errorFactory: ErrorFactoryService;
   requestParams: DemoRequestDto;
   computedSum?: number;
   computedAverage?: number;

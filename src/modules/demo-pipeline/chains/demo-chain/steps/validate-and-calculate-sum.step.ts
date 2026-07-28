@@ -7,17 +7,28 @@ export const validateAndCalculateSumStep = asStep<IDemoContext>(
   function validateAndCalculateSum(context: IDemoContext): IDemoContext {
     const { title, items } = context.requestParams;
 
-    if (!title || !Array.isArray(items) || items.length === 0) {
+    if (!title || typeof title !== 'string') {
+      context.appLogger.error('Validation failed: Missing title in request!', {
+        event: LogContextEvent.VALIDATION_FAILED,
+        operation: 'validateAndCalculateSumStep',
+      });
+      throw context.errorFactory
+        .createDefaultError('MISSING_REQUIRED_FIELD')
+        .withRawErrorMessage('Title is required and must be a string!');
+    }
+
+    if (!items.every((item) => typeof item === 'number')) {
       context.appLogger.error(
-        'Validation failed: Missing title or empty items',
+        'Validation failed: Items array has invalid numbers',
         {
           event: LogContextEvent.VALIDATION_FAILED,
           operation: 'validateAndCalculateSumStep',
         },
       );
-      throw new Error('Title and a non-empty items array are required.');
+      throw context.errorFactory
+        .createDefaultError('BAD_REQUEST')
+        .withRawErrorMessage('Items must be a number array!');
     }
-
     const sum: number = items.reduce(
       (acc: number, val: number): number => acc + val,
       0,

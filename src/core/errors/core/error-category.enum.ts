@@ -1,0 +1,16 @@
+export enum ErrorCategory {
+  AUTHENTICATION = '01',
+  AUTHORIZATION = '02',
+  VALIDATION = '03',
+  REQUEST_FORMAT = '04',
+  DATABASE = '05',
+  SERVER = '06',
+  NETWORK = '07',
+  RUNTIME = '08',
+  GENERIC = '09',
+  FEATURE_SPECIFIC = '10',
+  PLATFORM_SPECIFIC = '11',
+  PARSING = '12',
+  DATA = '13',
+  INPUT_OUTPUT = '14',
+}
