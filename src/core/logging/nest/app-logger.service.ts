@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { ClsService } from 'nestjs-cls';
+import { ClsService } from 'nestjs-cls';
 
 import { AppLogger } from '../core/app-logger';
 import type { IAppLogger, IAppLoggerContext } from '../core/interfaces';
