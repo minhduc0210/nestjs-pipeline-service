@@ -25,6 +25,7 @@ export interface IAppLoggerContext extends Record<string, unknown> {
   event: LogContextEvent;
   operation: string;
   requestId?: string;
+  correlationId?: string;
   service?: string;
   component?: string;
   provider?: string;
@@ -98,11 +99,8 @@ export interface IDiagnostics {
     args?: string[];
   };
   debug?: Record<string, unknown>;
-  session?: {
-    sessionKey: string;
-    sessionToken: string;
-  };
 }
+
 export interface IAppLogger {
   info(message: string, context?: IAppLoggerContext): void;
   error(message: string, context?: IAppLoggerContext, stack?: string): void;

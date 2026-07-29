@@ -21,10 +21,13 @@ export class AppLoggerService implements IAppLogger {
 
     const requestId: string | undefined =
       this.clsService?.get<string>('requestId');
+    const correlationId: string | undefined =
+      this.clsService?.get<string>('correlationId');
 
     return {
       ...context,
       requestId: context.requestId ?? requestId,
+      correlationId: context.correlationId ?? correlationId,
       timestamp: new Date().toISOString(),
     };
   }
