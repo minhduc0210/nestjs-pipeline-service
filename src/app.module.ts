@@ -15,6 +15,7 @@ import { ErrorFactoryModule } from './core/errors/nest/error-factory.module';
 import { createReadinessChecks } from './core/health/core/readiness-checks';
 import { HealthModule } from './core/health/nest/health.module';
 import { AppLoggerModule } from './core/logging/nest/app-logger.module';
+import { RateLimiterModule } from './core/throttler/nest/rate-limiter.module';
 import { TraceabilityMiddleware } from './core/traceability/traceability.middleware';
 import { TraceabilityModule } from './core/traceability/traceability.module';
 import { DemoPipelineModule } from './modules/demo-pipeline/demo-pipeline.module';
@@ -34,6 +35,7 @@ import { DemoPipelineModule } from './modules/demo-pipeline/demo-pipeline.module
     }),
     ErrorFactoryModule.forRoot('PIPELINE_SERVICE'),
     AppConfigModule,
+    RateLimiterModule,
   ],
   controllers: [AppController],
   providers: [
