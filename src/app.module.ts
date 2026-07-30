@@ -9,6 +9,7 @@ import { ClsModule } from 'nestjs-cls';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AppConfigModule } from './core/config/app-config.module';
 import { AppExceptionFilter } from './core/errors/nest/app-exception.filter';
 import { ErrorFactoryModule } from './core/errors/nest/error-factory.module';
 import { createReadinessChecks } from './core/health/core/readiness-checks';
@@ -32,6 +33,7 @@ import { DemoPipelineModule } from './modules/demo-pipeline/demo-pipeline.module
       checks: createReadinessChecks(),
     }),
     ErrorFactoryModule.forRoot('PIPELINE_SERVICE'),
+    AppConfigModule,
   ],
   controllers: [AppController],
   providers: [
