@@ -18,8 +18,8 @@ export function setupSwagger(
 ): void {
   const {
     path = 'api-docs',
-    title = '[PIPELINE_SERVICE] Technologia API Studio',
-    description = 'High-tech OpenAPI specification & interactive developer portal',
+    title = '[PIPELINE_SERVICE] Microservice API',
+    description = 'Interactive OpenAPI specification & developer documentation',
     version = '1.0.0',
     documentOptions,
     ...swaggerUiOptions

@@ -27,8 +27,8 @@ describe('setupSwagger & swagger.config', () => {
     it('should generate default options with default system code', () => {
       const options = getDefaultSwaggerOptions();
       expect(options.systemCode).toBe('PIPELINE_SERVICE');
-      expect(options.title).toBe('[PIPELINE_SERVICE] Technologia API Studio');
-      expect(options.customSiteTitle).toBe('⚡ [PIPELINE_SERVICE] Technologia API Studio');
+      expect(options.title).toBe('[PIPELINE_SERVICE] Microservice API');
+      expect(options.customSiteTitle).toBe('[PIPELINE_SERVICE] API Documentation');
       expect(options.explorer).toBe(true);
       expect(options.raw).toBe(true);
       expect(options.customCss).toBeDefined();
@@ -45,8 +45,8 @@ describe('setupSwagger & swagger.config', () => {
     it('should generate default options with custom system code', () => {
       const options = getDefaultSwaggerOptions({ systemCode: 'BOOKING_SVC' });
       expect(options.systemCode).toBe('BOOKING_SVC');
-      expect(options.title).toBe('[BOOKING_SVC] Technologia API Studio');
-      expect(options.customSiteTitle).toBe('⚡ [BOOKING_SVC] Technologia API Studio');
+      expect(options.title).toBe('[BOOKING_SVC] Microservice API');
+      expect(options.customSiteTitle).toBe('[BOOKING_SVC] API Documentation');
     });
   });
 
@@ -58,7 +58,7 @@ describe('setupSwagger & swagger.config', () => {
         mockApp,
         expect.objectContaining({
           info: expect.objectContaining({
-            title: '[PIPELINE_SERVICE] Technologia API Studio',
+            title: '[PIPELINE_SERVICE] Microservice API',
             version: '1.0.0',
           }),
         }),
@@ -72,7 +72,7 @@ describe('setupSwagger & swagger.config', () => {
         mockApp,
         expect.anything(),
         expect.objectContaining({
-          customSiteTitle: '⚡ [PIPELINE_SERVICE] Technologia API Studio',
+          customSiteTitle: '[PIPELINE_SERVICE] API Documentation',
           explorer: true,
           raw: true,
           swaggerOptions: expect.objectContaining({
