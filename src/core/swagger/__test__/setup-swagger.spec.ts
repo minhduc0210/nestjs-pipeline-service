@@ -35,6 +35,13 @@ describe('setupSwagger & swagger.config', () => {
       expect(options.customJsStr).toBeDefined();
     });
 
+    it('should generate default operationIdFactory returning methodKey', () => {
+      const options = getDefaultSwaggerOptions();
+      expect(options.documentOptions?.operationIdFactory).toBeDefined();
+      const operationId = options.documentOptions!.operationIdFactory!('UsersController', 'createUser');
+      expect(operationId).toBe('createUser');
+    });
+
     it('should generate default options with custom system code', () => {
       const options = getDefaultSwaggerOptions('BOOKING_SVC');
       expect(options.systemCode).toBe('BOOKING_SVC');
@@ -44,7 +51,7 @@ describe('setupSwagger & swagger.config', () => {
   });
 
   describe('setupSwagger', () => {
-    it('should setup Swagger with default configuration options', () => {
+    it('should setup Swagger with default configuration options and documentOptions', () => {
       setupSwagger(mockApp);
 
       expect(SwaggerModule.createDocument).toHaveBeenCalledWith(
@@ -54,6 +61,9 @@ describe('setupSwagger & swagger.config', () => {
             title: '[PIPELINE_SERVICE] Technologia API Studio',
             version: '1.0.0',
           }),
+        }),
+        expect.objectContaining({
+          operationIdFactory: expect.any(Function),
         }),
       );
 
@@ -97,6 +107,9 @@ describe('setupSwagger & swagger.config', () => {
             description: 'Custom Description',
             version: '2.0',
           }),
+        }),
+        expect.objectContaining({
+          operationIdFactory: expect.any(Function),
         }),
       );
 

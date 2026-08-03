@@ -1,4 +1,7 @@
-import type { SwaggerCustomOptions } from '@nestjs/swagger';
+import type {
+  SwaggerCustomOptions,
+  SwaggerDocumentOptions,
+} from '@nestjs/swagger';
 
 /**
  * Interface defining options for configuring Swagger / OpenAPI documentation.
@@ -15,6 +18,8 @@ export interface ISwaggerOptions extends SwaggerCustomOptions {
   version?: string;
   /** System code retrieved from AppConfigService */
   systemCode?: string;
+  /** Custom OpenAPI document options (e.g. operationIdFactory, extraModels, deepScanRoutes) */
+  documentOptions?: SwaggerDocumentOptions;
 }
 
 /**
@@ -272,7 +277,7 @@ export const SWAGGER_CUSTOM_JS_STR = `
 `;
 
 /**
- * Returns default Swagger options configured with the Technologia theme.
+ * Returns default Swagger options configured with the Technologia theme and custom operationIdFactory.
  *
  * @param systemCode - Optional system identifier for titling
  */
@@ -294,6 +299,10 @@ export function getDefaultSwaggerOptions(
     raw: true,
     jsonDocumentUrl: 'api-docs-json',
     yamlDocumentUrl: 'api-docs-yaml',
+    documentOptions: {
+      operationIdFactory: (_controllerKey: string, methodKey: string) =>
+        methodKey,
+    },
     swaggerOptions: {
       persistAuthorization: true,
       displayRequestDuration: true,

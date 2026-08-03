@@ -24,6 +24,10 @@ export function setupSwagger(
       ...defaults.swaggerOptions,
       ...options?.swaggerOptions,
     },
+    documentOptions: {
+      ...defaults.documentOptions,
+      ...options?.documentOptions,
+    },
   };
 
   const {
@@ -31,6 +35,7 @@ export function setupSwagger(
     title = '[PIPELINE_SERVICE] Microservice API Studio',
     description = 'Interactive OpenAPI specification for microservice endpoints',
     version = '1.0.0',
+    documentOptions,
     ...customUiOptions
   } = mergedOptions;
 
@@ -49,7 +54,7 @@ export function setupSwagger(
     .addBearerAuth()
     .build();
 
-  const document = SwaggerModule.createDocument(app, config);
+  const document = SwaggerModule.createDocument(app, config, documentOptions);
 
   SwaggerModule.setup(path, app, document, customUiOptions);
 }
