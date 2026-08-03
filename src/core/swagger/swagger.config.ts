@@ -294,7 +294,7 @@ export function getDefaultSwaggerOptions(
     version: '1.0.0',
     customSiteTitle: `⚡ [${systemCode}] Technologia API Studio`,
     customfavIcon: 'https://nestjs.com/img/logo-small.svg',
-    customCss: SWAGGER_CUSTOM_CSS,
+    // customCss: SWAGGER_CUSTOM_CSS,
     customJsStr: SWAGGER_CUSTOM_JS_STR,
     explorer: true,
     raw: true,
