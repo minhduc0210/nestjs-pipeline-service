@@ -16,28 +16,14 @@ export function setupSwagger(
   app: INestApplication,
   options?: ISwaggerOptions,
 ): void {
-  const defaults = getDefaultSwaggerOptions(options?.systemCode);
-  const mergedOptions: ISwaggerOptions = {
-    ...defaults,
-    ...options,
-    swaggerOptions: {
-      ...defaults.swaggerOptions,
-      ...options?.swaggerOptions,
-    },
-    documentOptions: {
-      ...defaults.documentOptions,
-      ...options?.documentOptions,
-    },
-  };
-
   const {
     path = 'api-docs',
-    title = '[PIPELINE_SERVICE] Microservice API Studio',
-    description = 'Interactive OpenAPI specification for microservice endpoints',
+    title = '[PIPELINE_SERVICE] Technologia API Studio',
+    description = 'High-tech OpenAPI specification & interactive developer portal',
     version = '1.0.0',
     documentOptions,
-    ...customUiOptions
-  } = mergedOptions;
+    ...swaggerUiOptions
+  } = getDefaultSwaggerOptions(options);
 
   const config = new DocumentBuilder()
     .setTitle(title)
@@ -56,5 +42,5 @@ export function setupSwagger(
 
   const document = SwaggerModule.createDocument(app, config, documentOptions);
 
-  SwaggerModule.setup(path, app, document, customUiOptions);
+  SwaggerModule.setup(path, app, document, swaggerUiOptions);
 }

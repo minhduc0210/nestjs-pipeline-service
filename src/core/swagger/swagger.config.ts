@@ -279,12 +279,13 @@ export const SWAGGER_CUSTOM_JS_STR = `
 /**
  * Returns default Swagger options configured with the Technologia theme and custom operationIdFactory.
  *
- * @param systemCode - Optional system identifier for titling
+ * @param options - Optional custom configuration options or systemCode override
  */
 export function getDefaultSwaggerOptions(
-  systemCode = 'PIPELINE_SERVICE',
+  options?: ISwaggerOptions,
 ): ISwaggerOptions {
-  return {
+  const systemCode = options?.systemCode ?? 'PIPELINE_SERVICE';
+  const defaults: ISwaggerOptions = {
     path: 'api-docs',
     systemCode,
     title: `[${systemCode}] Technologia API Studio`,
@@ -317,6 +318,19 @@ export function getDefaultSwaggerOptions(
       syntaxHighlight: {
         theme: 'monokai',
       },
+    },
+  };
+
+  return {
+    ...defaults,
+    ...options,
+    documentOptions: {
+      ...defaults.documentOptions,
+      ...options?.documentOptions,
+    },
+    swaggerOptions: {
+      ...defaults.swaggerOptions,
+      ...options?.swaggerOptions,
     },
   };
 }

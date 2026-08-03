@@ -43,7 +43,7 @@ describe('setupSwagger & swagger.config', () => {
     });
 
     it('should generate default options with custom system code', () => {
-      const options = getDefaultSwaggerOptions('BOOKING_SVC');
+      const options = getDefaultSwaggerOptions({ systemCode: 'BOOKING_SVC' });
       expect(options.systemCode).toBe('BOOKING_SVC');
       expect(options.title).toBe('[BOOKING_SVC] Technologia API Studio');
       expect(options.customSiteTitle).toBe('⚡ [BOOKING_SVC] Technologia API Studio');
