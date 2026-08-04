@@ -19,7 +19,7 @@ export function setupSwagger(
   const {
     path = 'api-docs',
     title = '[PIPELINE_SERVICE] Microservice API',
-    description = 'Interactive OpenAPI specification & developer documentation',
+    description = 'Interactive OpenAPI specification & developer documentation.\n\n[📄 View Raw OpenAPI JSON (/api-docs-json)](/api-docs-json) | [📝 View Raw OpenAPI YAML (/api-docs-yaml)](/api-docs-yaml)',
     version = '1.0.0',
     documentOptions,
     ...swaggerUiOptions

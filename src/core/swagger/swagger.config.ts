@@ -46,14 +46,30 @@ export const SWAGGER_CUSTOM_CSS = `
 `;
 
 /**
- * Custom JavaScript script injected into Swagger UI page for interactive console logging.
+ * Custom JavaScript script injected into Swagger UI page to render a direct OpenAPI JSON link button in the topbar.
  */
 export const SWAGGER_CUSTOM_JS_STR = `
   console.log("%c ⚡ API Explorer Ready ", "background: #0ea5e9; color: #ffffff; font-size: 14px; font-weight: bold; border-radius: 4px; padding: 6px 12px;");
+  window.addEventListener("DOMContentLoaded", function() {
+    setTimeout(function() {
+      var topbar = document.querySelector(".topbar-wrapper");
+      if (topbar && !document.getElementById("swagger-json-btn")) {
+        var btn = document.createElement("a");
+        btn.id = "swagger-json-btn";
+        btn.href = "/api-docs-json";
+        btn.target = "_blank";
+        btn.innerHTML = "📄 View Raw JSON (/api-docs-json)";
+        btn.style.cssText = "color: #ffffff; background-color: #0284c7; font-weight: 600; font-size: 0.85rem; margin-left: auto; text-decoration: none; padding: 6px 14px; border-radius: 6px; border: 1px solid #0369a1; transition: background-color 0.2s;";
+        btn.onmouseover = function() { btn.style.backgroundColor = "#0369a1"; };
+        btn.onmouseout = function() { btn.style.backgroundColor = "#0284c7"; };
+        topbar.appendChild(btn);
+      }
+    }, 300);
+  });
 `;
 
 /**
- * Returns default Swagger options using standard Swagger UI default styling with minimal topbar tweaks.
+ * Returns default Swagger options using standard Swagger UI default styling with direct JSON spec links.
  *
  * @param options - Optional custom configuration options or systemCode override
  */
@@ -65,7 +81,8 @@ export function getDefaultSwaggerOptions(
     path: 'api-docs',
     systemCode,
     title: `[${systemCode}] Microservice API`,
-    description: 'Interactive OpenAPI specification & developer documentation',
+    description:
+      'Interactive OpenAPI specification & developer documentation.\n\n[📄 View Raw OpenAPI JSON (/api-docs-json)](/api-docs-json) | [📝 View Raw OpenAPI YAML (/api-docs-yaml)](/api-docs-yaml)',
     version: '1.0.0',
     customSiteTitle: `[${systemCode}] API Documentation`,
     customfavIcon: 'https://nestjs.com/img/logo-small.svg',
