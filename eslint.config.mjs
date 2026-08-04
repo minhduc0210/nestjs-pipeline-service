@@ -15,6 +15,7 @@ export default tseslint.config(
       '**/*.d.ts',
       'eslint.config.mjs',
       'jest.config.js',
+      'commitlint.config.js',
       'scripts/**/*',
       '**/*.spec.ts',
     ],
