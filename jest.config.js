@@ -16,7 +16,7 @@ module.exports = {
     '.*\\.mock\\.ts$',
     '.*\\.dto\\.ts$',
     '.*\\.d\\.ts$',
-    'index.ts'
+    'index.ts',
   ],
   rootDir: '.',
   testRegex: '.*\\.spec\\.ts$',
@@ -25,6 +25,14 @@ module.exports = {
   },
   collectCoverageFrom: ['**/*.(t|j)s'],
   coverageDirectory: './coverage',
+  coverageThreshold: {
+    global: {
+      branches: 75,
+      functions: 80,
+      lines: 80,
+      statements: 80,
+    },
+  },
   testEnvironment: 'node',
   roots: ['<rootDir>/src/'],
   moduleNameMapper: {
