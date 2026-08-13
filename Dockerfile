@@ -32,13 +32,19 @@ RUN pnpm prune --prod --ignore-scripts
 # Stage 3: Final Production Runner
 # ==========================================
 FROM base AS runner 
+LABEL maintainer="haquocminhduc@gmail.com"
+LABEL version="1.0.0"
+LABEL description="NestJS Pipeline Service Production Image"
 ENV NODE_ENV=production
 
 COPY --from=builder --chown=node:node /app/dist ./dist
 COPY --from=builder --chown=node:node /app/node_modules ./node_modules
 COPY --from=builder --chown=node:node /app/package.json ./package.json
 
-EXPOSE 5438
+EXPOSE 3000
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/health/live || exit 1
 
 USER node:node
 
